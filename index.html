@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+<title>TwitMap Using GAE&AWS</title>
+<script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJR-44M1qeLStLeQTMxNLMdG_J36Ge6P4&sensor=false&libraries=visualization">
+</script>
+<script> 
+
+  var places = new Array();
+  var geoData = new Array();
+  
+  {% for tweet in tweets %}
+   geoData.push(new google.maps.LatLng({{ tweet.lat }}, {{ tweet.long }}));
+  {% endfor %}
+
+  var geocoder;
+  var map;
+  var heatmap;
+
+  function initialize() {
+  
+    var mapOptions = {
+      zoom: 2,
+      center: new google.maps.LatLng(30.5171, 0.1062),
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    }
+
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+
+    var pointArray = new google.maps.MVCArray(geoData);
+
+    heatmap = new google.maps.visualization.HeatmapLayer({
+      data: pointArray
+    });
+
+    heatmap.setMap(map);
+    //heatmap.set('radius', 20);
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+<style>
+#form {
+ position:relative;
+ left: 350px;
+ top: 50px;
+}
+</style>
+<body>
+ <div id="map-canvas" style="width: 1000px; height: 600px;"></div>
+ <div id="form">
+<form action="/" method="get">
+ <select name="keyword">
+   <option value="">Select Hashtag</option>
+  {% for tweet in toptweets %}
+   <option value="{{ tweet.keywords }}"> {{tweet.keywords}} </option> 
+  {% endfor %}
+   <input type="submit" value="Submit">
+ </select>
+ </form>
+</div>
+</body>
+</html>
+{% endautoescape %}
