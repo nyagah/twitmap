@@ -3,7 +3,8 @@ import json
 import requests
 import pprint
 
-api_key = ''
+
+api_key = ''                                                              
 api_secret = ''
 access_token = ''
 access_token_secret = ''
@@ -13,7 +14,7 @@ class Listener(tweepy.StreamListener):
     def __init__(self, output):
         self.output = output
         self.counter = 0
-        self.url = 'http://twitmap-heatmap.appspot.com/post'
+        self.url = ''
         self.headers = {'Content-Type': 'application/json'}
 
     def on_data(self, data):
@@ -41,7 +42,7 @@ class Listener(tweepy.StreamListener):
             
             self.counter += 1
 
-            if self.counter > 9:
+            if self.counter > 99:
                 return False
             
             #if self.counter > 5:
