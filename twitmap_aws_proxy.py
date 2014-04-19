@@ -3,10 +3,10 @@ import json
 import requests
 import pprint
 
-api_key = 'LBXrYI0Xgwaf0QaFQy9ll56SP'
-api_secret = 'lTraUuwfsgjfaGLZiQBLfjUoIa1PW0cEPhZaRWvjvNrrHmWkip'
-access_token = '2446011463-PFf1vR92kURnrYTDysU4kdTAi2fQCQUsy6oDPyB'
-access_token_secret = 'qMrXtlxcdKz7HD2NEoRcnr9kwD1f7DdMKf0JpioL3Dnvt'
+api_key = ''
+api_secret = ''
+access_token = ''
+access_token_secret = ''
 
 class Listener(tweepy.StreamListener):
 
